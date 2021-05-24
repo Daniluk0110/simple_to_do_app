@@ -12,9 +12,15 @@
       <input
           class="form-check-input"
           type="checkbox"
-      v-on:change="todo.completed = !todo.completed">
+          v-on:change="todo.completed = !todo.completed">
     </td>
-    <td><button class="btn btn-danger" type="button">Delete</button></td>
+    <td><button
+          class="btn btn-danger"
+          type="button"
+          v-on:click="$emit('remove-todo', todo.id)"  >
+        Delete
+      </button>
+    </td>
   </tr>
 </template>
 

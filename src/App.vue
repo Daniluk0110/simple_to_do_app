@@ -2,6 +2,7 @@
   <div id="app">
     <Navbar />
     <h1 class="display-2 mb-4 mt-4">Todo application</h1>
+    <AddTodo />
     <TodoList
       v-bind:todos="todos"
       v-on:remove-todo="removeTodo"
@@ -12,6 +13,7 @@
 <script>
 import TodoList from '@/components/TodoList'
 import Navbar from "@/components/Navbar"
+import AddTodo from "@/components/AddTodo"
 
 export default {
   name: 'App',
@@ -32,8 +34,7 @@ export default {
     }
   },
   components: {
-    TodoList,
-    Navbar
+    TodoList, Navbar, AddTodo
   }
 }
 </script>

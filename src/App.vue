@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar />
-    <h1>Todo application</h1>
+    <h1 class="display-2 mb-4 mt-4">Todo application</h1>
     <TodoList
       v-bind:todos="todos"
     />

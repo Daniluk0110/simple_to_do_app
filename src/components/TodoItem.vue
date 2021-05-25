@@ -6,7 +6,7 @@
 
 <template>
   <tr :class="{'table-success': todo.completed}">
-    <th scope="row">{{ index }}</th>
+    <th scope="row">{{ index + 1 }}</th>
     <td :class="{'lineThrough': todo.completed}">{{ todo.title }}</td>
     <td>
       <input

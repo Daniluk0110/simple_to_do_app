@@ -30,7 +30,6 @@ export default {
   methods: {
     removeTodo(id) {
       this.$emit('remove-todo', id)
-      console.log(id)
     }
   },
   components: {

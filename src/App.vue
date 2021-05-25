@@ -2,7 +2,9 @@
   <div id="app">
     <Navbar />
     <h1 class="display-2 mb-4 mt-4">Todo application</h1>
-    <AddTodo />
+    <AddTodo
+      v-on:add-todo="addTodo"
+    />
     <TodoList
       v-bind:todos="todos"
       v-on:remove-todo="removeTodo"
@@ -31,6 +33,9 @@ export default {
   methods: {
     removeTodo(id) {
       this.todos = this.todos.filter(t => t.id !== id)
+    },
+    addTodo(todo) {
+      this.todos.push(todo)
     }
   },
   components: {

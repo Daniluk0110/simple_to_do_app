@@ -6,7 +6,7 @@
 
 <template>
   <tr :class="{'table-success': todo.completed}">
-    <th scope="row">{{ todo.id }}</th>
+    <th scope="row">{{ index }}</th>
     <td :class="{'lineThrough': todo.completed}">{{ todo.title }}</td>
     <td>
       <input
@@ -30,7 +30,8 @@ export default {
     todo: {
       type: Object,
       require: true
-    }
+    },
+    index: Number
   }
 }
 </script>

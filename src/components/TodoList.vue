@@ -12,8 +12,9 @@
         </thead>
         <tbody>
         <TodoItem
-            v-for="todo in todos" :key="todo.id"
+            v-for="(todo, i) in todos" :key="todo.id"
             v-bind:todo="todo"
+            v-bind:index="i"
             v-on:remove-todo="removeTodo"
         />
         </tbody>

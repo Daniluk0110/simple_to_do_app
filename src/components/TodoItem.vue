@@ -7,9 +7,10 @@
 <template>
   <tr :class="{'table-success': todo.completed}">
     <th scope="row">{{ index + 1 }}</th>
-    <td :class="{'lineThrough': todo.completed}">{{ todo.title }}</td>
+    <td :class="{'lineThrough': todo.completed}">{{ todo.title | uppercase }}</td>
     <td>
       <input
+          v-if="!todo.completed"
           class="form-check-input"
           type="checkbox"
           v-on:change="todo.completed = !todo.completed">
@@ -32,6 +33,11 @@ export default {
       require: true
     },
     index: Number
+  },
+  filters: {
+    uppercase(value) {
+      return value.toUpperCase()
+    }
   }
 }
 </script>

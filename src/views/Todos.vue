@@ -6,6 +6,7 @@
     <AddTodo
         v-on:add-todo="addTodo"
     />
+    <select name="" id=""></select>
     <Loader v-if="loading" />
     <TodoList
         v-else-if="todos.length"

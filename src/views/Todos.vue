@@ -1,16 +1,27 @@
 <template>
-  <div>
+  <div class="container">
     <h2 class="display-2 mb-4 mt-4">Todo application</h2>
     <router-link class="btn btn-dark" to="/">Home</router-link>
     <hr>
     <AddTodo
         v-on:add-todo="addTodo"
     />
-    <select name="" id=""></select>
+    <div class="align-items-center">
+      <div class="col-4">
+        <p>Filter:</p>
+        <select v-model="filter" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="not-completed">Not completed</option>
+        </select>
+      </div>
+    </div>
+
+
     <Loader v-if="loading" />
     <TodoList
-        v-else-if="todos.length"
-        v-bind:todos="todos"
+        v-else-if="filteredTodos.length"
+        v-bind:todos="filteredTodos"
         v-on:remove-todo="removeTodo"
     />
     <p v-else>No todos!</p>
@@ -27,7 +38,8 @@ export default {
   data() {
     return {
       todos: [],
-      loading: true
+      loading: true,
+      filter: 'all'
     }
   },
   mounted() {
@@ -37,6 +49,25 @@ export default {
           this.todos = json
           this.loading = false
         })
+  },
+  watch: {
+    // наблюдает
+  },
+  computed: {
+    filteredTodos() {
+      if (this.filter === 'all') {
+        return this.todos
+      }
+
+      if (this.filter === 'completed') {
+        return this.todos.filter(t => t.completed)
+      }
+
+      if (this.filter === 'not-completed') {
+        return this.todos.filter(t => !t.completed)
+      }
+      return 'all'
+    }
   },
   methods: {
     removeTodo(id) {

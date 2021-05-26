@@ -1,39 +1,59 @@
 <template>
   <div class="container">
-    <div class="col">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th scope="col">#id</th>
-          <th scope="col">Todo</th>
-          <th scope="col">Done</th>
-          <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <TodoItem
-            v-for="(todo, i) in todos" :key="todo.id"
-            v-bind:todo="todo"
-            v-bind:index="i"
-            v-on:remove-todo="removeTodo"
-        />
-        </tbody>
-      </table>
+    <h1>All Todos</h1>
+    <div class="row">
+      <div class="col-6">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Todo name</th>
+            <th>#</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="todo in todos" :key="todo.id">
+            <th>{{ todo.content }}</th>
+            <th><span class="btn btn-danger" @click="deleteTodoFun(todo)">Delete</span></th>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-6">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Todo name</th>
+            <th>#</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="todo in todos" :key="todo.id">
+            <th>{{ todo.content }}</th>
+            <th><span class="btn btn-danger" @click="deleteTodoFun(todo)">Delete</span></th>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import TodoItem from "@/components/TodoItem";
 export default {
-  props: ['todos'],
-  methods: {
-    removeTodo(id) {
-      this.$emit('remove-todo', id)
+  data() {
+    return {
+      content: ''
     }
   },
-  components: {
-    TodoItem
+  computed: {
+    todos() {
+      return this.$store.getters.getAllTodoDetails;
+    }
+  },
+  methods: {
+    deleteTodoFun(todo) {
+      this.$store.commit('deleteTodo', todo);
+    }
   }
 }
 </script>

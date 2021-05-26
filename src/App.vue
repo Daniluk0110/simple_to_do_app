@@ -1,16 +1,24 @@
 <template>
   <div id="app">
     <Navbar />
-    <router-view />
+    <app-input-box></app-input-box>
+    <app-todo-list></app-todo-list>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar"
+import InputBox from './components/InputBox';
+import TodoList from './components/TodoList';
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    'app-input-box': InputBox,
+    'app-todo-list': TodoList
+  },
+  data () {
+    return {}
   }
 }
 </script>

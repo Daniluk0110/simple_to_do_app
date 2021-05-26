@@ -25,6 +25,7 @@
         v-on:remove-todo="removeTodo"
     />
     <p v-else>No todos!</p>
+    <TodoList v-bind:todos="filteredTodos" />
   </div>
 </template>
 
@@ -43,16 +44,16 @@ export default {
     }
   },
   mounted() {
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
-        .then(response => response.json())
-        .then(json => {
-          setTimeout(() => {
-            this.todos = json
-            this.loading = false
-          }, 2000)
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=4')
+      .then(response => response.json())
+      .then(json => {
+        setTimeout(() => {
           this.todos = json
           this.loading = false
-        })
+        }, 2000)
+        this.todos = json
+        this.loading = false
+      })
   },
   watch: {
     // наблюдает
@@ -79,6 +80,9 @@ export default {
     },
     addTodo(todo) {
       this.todos.push(todo)
+    },
+    updateTodos() {
+      this.store.dispatch('updateTodos', this.todos)
     }
   },
   components: {

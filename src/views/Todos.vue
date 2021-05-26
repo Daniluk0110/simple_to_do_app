@@ -29,29 +29,32 @@
 </template>
 
 <script>
-import { mapGetters, mapActions} from "vuex"
 import TodoList from "@/components/TodoList"
 import AddTodo from "@/components/AddTodo"
 import Loader from "@/components/Loader"
 
 export default {
   name: 'App',
-  // data() {
-  //   return {
-  //     todos: [],
-  //     loading: true,
-  //     filter: 'all'
-  //   }
-  // },
-  computed: mapGetters(['allTodos', 'loading', 'filter']),
-  async mounted() {
-    // await this.$store.dispatch('fetchTodos')
-    this.fetchTodos()
+  data() {
+    return {
+      todos: []
+    }
   },
-  watch: {
-    // наблюдает
+  mounted() {
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
+        .then(response => response.json())
+        .then(json => {
+          this.todos = json
+        })
   },
-  methods: mapActions(['fetchTodos']),
+  methods: {
+    removeTodo(id) {
+      this.todos = this.todos.filter(t => t.id !== id)
+    },
+    addTodo(todo) {
+      this.todos.push(todo)
+    }
+  },
   components: {
     TodoList, AddTodo, Loader
   }

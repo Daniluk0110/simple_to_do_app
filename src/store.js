@@ -20,9 +20,7 @@ export const store = new Vuex.Store({
       state.todoDetails.push(newTodo);
     },
     deleteTodo(state, todo) {
-      state.todoDetails.splice(
-        state.todoDetails.indexOf(todo), 1
-      )
+      state.todoDetails.splice(state.todoDetails.indexOf(todo), 1)
     }
   },
   actions: { // actions is great for asynchronous call

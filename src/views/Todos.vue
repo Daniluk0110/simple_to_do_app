@@ -37,15 +37,41 @@ export default {
   name: 'App',
   data() {
     return {
-      todos: []
+      todos: [],
+      loading: true,
+      filter: 'all'
     }
   },
   mounted() {
     fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
         .then(response => response.json())
         .then(json => {
+          setTimeout(() => {
+            this.todos = json
+            this.loading = false
+          }, 2000)
           this.todos = json
+          this.loading = false
         })
+  },
+  watch: {
+    // наблюдает
+  },
+  computed: {
+    filteredTodos() {
+      if (this.filter === 'all') {
+        return this.todos
+      }
+
+      if (this.filter === 'completed') {
+        return this.todos.filter(t => t.completed)
+      }
+
+      if (this.filter === 'not-completed') {
+        return this.todos.filter(t => !t.completed)
+      }
+      return 'all'
+    }
   },
   methods: {
     removeTodo(id) {
